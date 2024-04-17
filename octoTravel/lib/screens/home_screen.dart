@@ -16,12 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Travel> travelList = [];
   String? where;
   String? how = "CAR";
+  Travel travel = Travel.empty();
   DateTime? stDate;
   DateTime? enDate;
+
+  void incrementCounter(Travel travel) {
+    setState(() {
+      travelList.add(travel);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     print("start");
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
@@ -370,17 +379,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         print(
                             'Il valore di "where" è: $where, Il valore di "how" è: $how, Il valore di "startDate" è: $stDate, Il valore di "endDate" è: $enDate,, Il valore di "bg" è: $test');
-                        Travel travel = Travel(
+                        Travel travel2 = Travel(
                             where: where,
                             startDate: stDate,
                             finishDate: enDate,
                             how: how,
                             background: test);
+                        travel = travel2;
+                        incrementCounter(travel2);
                         //travelList.add(travel);
                         //print(travelList.getRange(0, 1));
 
                         setState(() {
-                          travelList.add(travel);
+                          // travelList.add(travel);
                         });
                         Navigator.pop(context);
                         test2 = "Choose from gallery";
